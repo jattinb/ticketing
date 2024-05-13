@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { RequestValidationError } from "../errors/request-validation-errors";
 
 export const errorHandler = (
     err: Error,
@@ -6,8 +7,16 @@ export const errorHandler = (
     res: Response,
     next: NextFunction
 ) => {
-    console.log("Something went wrong", err);
-
+    if (err instanceof RequestValidationError) {
+        const formattedErrors = err.errors.map((error) => {
+            if (error.type === 'field') {
+                return { message: error.msg, field: error.path };
+            }
+        })
+        res.status(400).send({
+            errors: formattedErrors
+        });
+    }
     res.status(400).send({
         message: err.message
     });
