@@ -7,5 +7,5 @@ Backend heavy ticketing site
     errors: {
         message: string, field?:string
     }
-}
+}[]
 ```

@@ -8,16 +8,9 @@ export const errorHandler = (
     next: NextFunction
 ) => {
     if (err instanceof RequestValidationError) {
-        const formattedErrors = err.errors.map((error) => {
-            if (error.type === 'field') {
-                return { message: error.msg, field: error.path };
-            }
-        })
-        res.status(400).send({
-            errors: formattedErrors
-        });
+        return res.status(err.statusCode).send(err.serializeErrors());
     }
-    res.status(400).send({
+    return res.status(400).send({
         message: err.message
     });
 };
