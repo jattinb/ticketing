@@ -3,7 +3,7 @@ import { app } from '../../app'
 
 it('fails when a email that does not exist is suppled', async () => {
     await request(app)
-        .post('/api/users/signin')
+        .post('/api/users/signup')
         .send({
             email: 'test@test.com',
             password: 'password'
@@ -21,7 +21,7 @@ it('fails when a email that does not exist is suppled', async () => {
 
 it('responds with a cookie when valid credentials are supplied', async () => {
     await request(app)
-        .post('/api/users/signin')
+        .post('/api/users/signup')
         .send({
             email: 'test@test.com',
             password: 'password'
@@ -33,7 +33,7 @@ it('responds with a cookie when valid credentials are supplied', async () => {
         .send({
             email: 'test@test.com',
             password: 'password'
-        })
+        }).expect(200)
 
     expect(response.get('Set-Cookie')).toBeDefined()
 })
