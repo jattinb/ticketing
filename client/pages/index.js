@@ -1,12 +1,14 @@
 import React from 'react';
+import buildClient from '../api/build-client';
 
-const Home = () => {
-    return (
-        <div>
-            <h1>Welcome to My App</h1>
-            <p>This is the homepage.</p>
-        </div>
-    );
+const LandingPage = ({ currentUser }) => {
+    return currentUser ? <h1>You are Signed In</h1> : <h1>You are NOT Signed In</h1>
 };
 
-export default Home;
+LandingPage.getInitialProps = async (context) => {
+
+    const { data } = await buildClient(context).get('/api/users/currentuser')
+    return data
+}
+
+export default LandingPage;
