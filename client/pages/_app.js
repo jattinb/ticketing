@@ -1,8 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import buildClient from '../api/build-client'
+import Nav from '../components/header'
 
-const AppComponent = ({ Component, pageProps }) => {
-    return <Component {...pageProps} />
+const AppComponent = ({ Component, pageProps, currentUser }) => {
+    return (
+        <div>
+            <Nav currentUser={currentUser} />
+            <Component {...pageProps} />
+        </div >
+    )
 }
 
 AppComponent.getInitialProps = async appContext => {
@@ -12,7 +18,10 @@ AppComponent.getInitialProps = async appContext => {
     if (appContext.Component.getInitialProps) {
         pageProps = await appContext.Component.getInitialProps(appContext.ctx)
     }
-    return data
+    return {
+        pageProps,
+        ...data
+    }
 }
 
 export default AppComponent
