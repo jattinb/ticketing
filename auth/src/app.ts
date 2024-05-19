@@ -8,6 +8,7 @@ import { signupRouter } from './routes/signup';
 import { signinRouter } from './routes/signin';
 import { NotFoundError } from './errors/not-found-error';
 import cookieSession from 'cookie-session';
+import { errorHandler } from './middlewares/error-handler';
 
 const app = express();
 app.set('trust proxy', true)    // To trust ingress nginx
@@ -27,5 +28,7 @@ app.use(signupRouter)
 app.get('*', async () => {
     return new NotFoundError()
 })
+
+app.use(errorHandler);
 
 export { app }
