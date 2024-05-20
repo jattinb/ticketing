@@ -6,9 +6,8 @@ import { currentUserRouter } from './routes/current-user';
 import { signoutRouter } from './routes/signout';
 import { signupRouter } from './routes/signup';
 import { signinRouter } from './routes/signin';
-import { NotFoundError } from './errors/not-found-error';
+import { NotFoundError, errorHandler } from '@ticketingjb/common';
 import cookieSession from 'cookie-session';
-import { errorHandler } from './middlewares/error-handler';
 
 const app = express();
 app.set('trust proxy', true)    // To trust ingress nginx
