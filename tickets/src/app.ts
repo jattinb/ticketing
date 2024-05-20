@@ -3,7 +3,7 @@ import 'express-async-errors';
 import { json } from 'body-parser';
 import { NotFoundError, errorHandler, currentUser } from '@ticketingjb/common';
 import cookieSession from 'cookie-session';
-import { createticketRouter } from './routes/new';
+import { createTicketRouter } from './routes/new';
 
 const app = express();
 app.set('trust proxy', true)    // To trust ingress nginx
@@ -16,7 +16,7 @@ app.use(
 )
 app.use(currentUser)
 
-app.use(createticketRouter)
+app.use(createTicketRouter)
 
 app.get('*', async () => {
     return new NotFoundError()
