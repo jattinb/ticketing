@@ -1,19 +1,19 @@
 import { app } from '../app'
 import request from 'supertest'
+import jwt from 'jsonwebtoken'
 
 
-export const signin = async () => {
-    const email = 'test@test.com'
-    const password = 'password'
+export const signin = () => {
+    const payload = {
+        id: '1lk24j123e',
+        email: 'test@test.com'
+    }
 
-    const response = await request(app)
-        .post('/api/users/signup')
-        .send({
-            email, password
-        })
-        .expect(201)
+    const token = jwt.sign(payload, process.env.JWT_KEY!)
+    const session = { jwt: token}
+    const sessionJSON = JSON.stringify(session)
+    const base64 = Buffer.from(sessionJSON).toString('base64')
 
-    const cookie = response.get('Set-Cookie')
+    return [`session=${base64}`]
 
-    return cookie!
 }
