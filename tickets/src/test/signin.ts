@@ -1,13 +1,14 @@
 import { app } from '../app'
 import request from 'supertest'
 import jwt from 'jsonwebtoken'
+import mongoose from 'mongoose'
 
 
 export const signin = () => {
     const payload = {
-        id: '1lk24j123e',
-        email: 'test@test.com'
-    }
+        id: new mongoose.Types.ObjectId().toHexString(),
+        email: 'test@test.com',
+      };
 
     const token = jwt.sign(payload, process.env.JWT_KEY!)
     const session = { jwt: token}
