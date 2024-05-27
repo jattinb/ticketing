@@ -43,6 +43,11 @@ const ticketSchema = new mongoose.Schema(
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
   return new Ticket(attrs);
 };
+
+// Make sure the ticket is not already reserved
+// Run query to look at all orders, find an order where the ticket
+// is the ticket we just found  *and* the orders status is *not* cancelled.
+// If we find an order from that means the ticket *is* reserved
 ticketSchema.methods.isReserved = async function () {
   const existingOrder = await Order.findOne({
     ticket: this,
