@@ -1,7 +1,7 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 
-jest.mock("../../nats-wrapper");
+jest.mock("../nats-wrapper");
 
 let mongo: any;
 
