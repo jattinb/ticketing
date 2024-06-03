@@ -6,16 +6,16 @@ export { OrderStatus };
 interface OrderAttrs {
   id: string;
   status: OrderStatus;
-  version: Number;
+  version: number;
   userId: string;
-  price: Number;
+  price: number;
 }
 
 interface OrderDoc extends mongoose.Document {
   status: OrderStatus;
-  version: Number;
+  version: number;
   userId: string;
-  price: Number;
+  price: number;
 }
 
 interface OrderModel extends mongoose.Model<OrderDoc> {
