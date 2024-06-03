@@ -5,6 +5,9 @@ jest.mock("../nats-wrapper");
 
 let mongo: any;
 
+process.env.STRIPE_KEY =
+  "sk_test_51PNZddBYq9j5mLiDSOgh8LKp0YmFCSX03nARpykq0SxoFX56PS5m7z5L8lK2xyqqjEjXAkB3S6j4sWmyeRdSIPmZ006sN0wqQJ";
+
 beforeAll(async () => {
   process.env.JWT_KEY = "asdf";
   mongo = await MongoMemoryServer.create();
