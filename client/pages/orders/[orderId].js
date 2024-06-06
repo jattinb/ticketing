@@ -8,9 +8,6 @@ const OrderShow = ({ order, currentUser }) => {
   const { doRequest, errors } = useRequest({
     url: '/api/payments',
     method: 'post',
-    body: {
-      orderId: order.id,
-    },
     onSuccess: () => Router.push('/orders'),
   });
 
@@ -28,6 +25,10 @@ const OrderShow = ({ order, currentUser }) => {
     };
   }, [order]);
 
+  const handleToken = async ({ id }) => {
+    const response = await doRequest({ orderId: order.id, token: id });
+  };
+
   if (timeLeft < 0) {
     return <div>Order Expired</div>;
   }
@@ -36,7 +37,7 @@ const OrderShow = ({ order, currentUser }) => {
     <div>
       Time left to pay: {timeLeft} seconds
       <StripeCheckout
-        token={({ id }) => doRequest({ token: id })}
+        token={handleToken}
         stripeKey="pk_test_51PNZddBYq9j5mLiDVYhFhWZbK06DefwjiOmgQxJOeSDLvVd3uTtBvlmOJVUfkKOiWilkKoK1JgkqyZeQW2snVTaf007IsVCruK"
         amount={order.ticket.price * 100}
         email={currentUser.email}
