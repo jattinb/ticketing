@@ -29,12 +29,8 @@ Backend heavy ticketing site built using microservices
 ### Frontend:
 1. Basic barebones react app
 
+## Architecture
 
-## Error response structure:
-```
-{
-    errors: {
-        message: string, field?:string
-    }
-}[]
-```
+### Event Flow between services and Databases used
+<img width="590" alt="Screenshot 2024-06-12 at 8 49 06 PM" src="https://github.com/jattinb/ticketing/assets/32822529/bc62a772-7a7e-4362-bf3c-6ff1ce1d0cee">
+
