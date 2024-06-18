@@ -8,6 +8,9 @@
     "test": "jest --watchAll --no-cache",
     "test:ci": "jest"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
